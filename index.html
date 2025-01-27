@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Sindy Downloader es una herramienta fácil de usar para descargar contenido multimedia de redes sociales como Instagram, YouTube, TikTok y más. Descarga reels, estados, videos y shorts de manera rápida y gratuita.">
+  <title>MediaDownloader</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="particles-js"></div>
+
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Sindy Downloader</h1>
+    <div class="accordion" id="accordionExample">
+      <!-- Descargar Reels -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingReels">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseReels" aria-expanded="false" aria-controls="collapseReels">
+            Descargar Reels de Instagram
+          </button>
+        </h2>
+        <div id="collapseReels" class="accordion-collapse collapse" aria-labelledby="headingReels"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <input type="text" id="reelUrl" class="form-control mb-3" placeholder="https://www.instagram.com/reel/...">
+            <button onclick="getReelData()" class="btn btn-primary w-100">Descargar Reel</button>
+            <div id="reelLoading" class="mt-3 text-black d-none">Cargando...</div>
+            <div id="reelVideoContainer" class="mt-3 d-none">
+
+              <p id="reelVideoQuality" class="text-black"></p>
+              <a id="reelDownloadLink" href="#" target="_blank" class="btn btn-success">Descargar Video</a>
+            </div>
+            <p id="reelError" class="mt-3 text-danger d-none">Algo salió mal. Intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Descargar Estados -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingEstados">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseEstados" aria-expanded="false" aria-controls="collapseEstados">
+            Descargar Estados de Instagram
+          </button>
+        </h2>
+        <div id="collapseEstados" class="accordion-collapse collapse" aria-labelledby="headingEstados"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <input type="text" id="statusUrl" class="form-control mb-3"
+              placeholder="https://www.instagram.com/stories/...">
+            <button onclick="getStatusData()" class="btn btn-secondary w-100">Descargar Estado</button>
+            <div id="statusLoading" class="mt-3 text-black d-none">Cargando...</div>
+            <div id="statusVideoContainer" class="mt-3 d-none">
+
+              <p id="statusVideoQuality" class="text-black"></p>
+              <a id="statusDownloadLink" href="#" target="_blank" class="btn btn-success">Descargar Video</a>
+            </div>
+            <p id="statusError" class="mt-3 text-danger d-none">Algo salió mal. Intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Descargar Videos de YouTube -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingYouTube">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseYouTube" aria-expanded="false" aria-controls="collapseYouTube">
+            Descargar Videos de YouTube
+          </button>
+        </h2>
+        <div id="collapseYouTube" class="accordion-collapse collapse" aria-labelledby="headingYouTube"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <input type="text" id="youtubeUrl" class="form-control mb-3"
+              placeholder="https://www.youtube.com/watch?v=...">
+            <button onclick="getYouTubeData()" class="btn btn-danger w-100">Descargar Video</button>
+            <div id="youtubeLoading" class="mt-3 text-black d-none">Cargando...</div>
+            <div id="youtubeVideoContainer" class="mt-3 d-none">
+              <p id="youtubeVideoQuality" class="text-black"></p>
+              <a id="youtubeDownloadLink" href="#" target="_blank" class="btn btn-success">Descargar Video</a>
+            </div>
+            <p id="youtubeError" class="mt-3 text-danger d-none">Algo salió mal. Intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Descargar Shorts -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingShorts">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseShorts" aria-expanded="false" aria-controls="collapseShorts">
+            Descargar Shorts de YouTube
+          </button>
+        </h2>
+        <div id="collapseShorts" class="accordion-collapse collapse" aria-labelledby="headingShorts"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <input type="text" id="shortUrl" class="form-control mb-3" placeholder="https://youtube.com/shorts/...">
+            <button onclick="getShortData()" class="btn btn-danger w-100">Descargar Short</button>
+            <div id="shortLoading" class="mt-3 text-black d-none">Cargando...</div>
+            <div id="shortVideoContainer" class="mt-3 d-none">
+
+              <p id="shortVideoQuality" class="text-black"></p>
+              <a id="shortDownloadLink" href="#" target="_blank" class="btn btn-success">Descargar Video</a>
+            </div>
+            <p id="shortError" class="mt-3 text-danger d-none">Algo salió mal. Intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Descargar Videos de TikTok -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTikTok">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseTikTok" aria-expanded="false" aria-controls="collapseTikTok">
+            Descargar Videos de TikTok
+          </button>
+        </h2>
+        <div id="collapseTikTok" class="accordion-collapse collapse" aria-labelledby="headingTikTok"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <input type="text" id="tiktokUrl" class="form-control mb-3"
+              placeholder="https://www.tiktok.com/@user/video/...">
+            <button onclick="getTikTokData()" class="btn btn-warning w-100">Descargar Video</button>
+            <div id="tiktokLoading" class="mt-3 text-black d-none">Cargando...</div>
+            <div id="tiktokVideoContainer" class="mt-3 d-none">
+              <p id="tiktokVideoQuality" class="text-black"></p>
+              <a id="tiktokDownloadLink" href="#" target="_blank" class="btn btn-success">Descargar Video</a>
+            </div>
+            <p id="tiktokError" class="mt-3 text-danger d-none">Algo salió mal. Intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h6 class="text-center mb-4 footer">Hecho con ❤️ para facilitarte la vida.</h6>
+
+  <a href="https://linktr.ee/fernan2lopezkto"
+    class="back-to-top d-flex align-items-center justify-content-center footer"
+    style="text-decoration: none; font-size: large;">4CodeUy</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 80, // Número de partículas
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ["#ffd700", "#000000"] // Amarillo y negro
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0
+          }
+        },
+        opacity: {
+          value: 0.8,
+          random: true
+        },
+        size: {
+          value: 4,
+          random: true
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffd700", // Líneas amarillas
+          opacity: 0.5,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 3,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse"
+          },
+          onclick: {
+            enable: true,
+            mode: "push"
+          }
+        },
+        modes: {
+          repulse: {
+            distance: 100,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+</body>
+
+</html>
