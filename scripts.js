@@ -49,7 +49,7 @@ async function fetchData(inputId, prefix) {
 
     // Realizar la solicitud
     const response = await fetch(
-      `https://social-media-video-downloader.p.rapidapi.com/smvd/get/all?url=${encodeURIComponent(videoUrl)}`,
+      `https://social-media-video-downloader.p.rapidapi.com/smvd/get/all?url=${encodeURIComponent(videoUrl)}&filename=${prefix}`,
       {
         method: 'GET',
         headers: {
@@ -74,9 +74,15 @@ async function fetchData(inputId, prefix) {
     // Actualizar la calidad y el enlace de descarga
     console.log(data);
     videoQuality.textContent = truncatedTitle;
-    downloadLink.href = data.links[1]?.link || "#";
+    console.log(videoQuality);
+    if (prefix == 'short' || prefix == 'youtube') {
+      downloadLink.href = data.links[8]?.link || "#";
+    }
+    else {
+      downloadLink.href = data.links[1]?.link || "#";
+    }
     downloadLink.download = `${prefix}_${truncatedTitle}.mp4`;
-
+    console.log(downloadLink);
     // Mostrar el contenedor de video
     videoContainer.classList.remove('d-none');
   } catch (err) {
