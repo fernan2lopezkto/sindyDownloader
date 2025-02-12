@@ -111,11 +111,11 @@ button.btn-danger {
 
 .footer {
   margin-top: 20px;
-  color: #070707;
+  color: #ffd700;
   /* Negro */
   text-align: center;
   font-size: large;
-  text-shadow: 1px 1px 1px rgb(238, 203, 5);
+  text-shadow: 1px 1px 1px rgb(29, 25, 0);
 }
 
 .img-thumbnail {

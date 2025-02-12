@@ -72,17 +72,25 @@ async function fetchData(inputId, prefix) {
     const truncatedTitle = data.title ? data.title.substring(0, 30) : "video";
 
     // Actualizar la calidad y el enlace de descarga
-    console.log(data);
+
     videoQuality.textContent = truncatedTitle;
-    console.log(videoQuality);
+
+
+    // Actualizar el enlace de descarga
     if (prefix == 'short' || prefix == 'youtube') {
       downloadLink.href = data.links[8]?.link || "#";
+    }
+    
+    else if (prefix == 'status') {
+      console.log('data: ', data);
+      downloadLink.href = data.links[2]?.link || "#";
     }
     else {
       downloadLink.href = data.links[1]?.link || "#";
     }
+
+    // Actualizar el nombre del archivo
     downloadLink.download = `${prefix}_${truncatedTitle}.mp4`;
-    console.log(downloadLink);
     // Mostrar el contenedor de video
     videoContainer.classList.remove('d-none');
   } catch (err) {
