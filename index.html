@@ -8,6 +8,9 @@
   <meta name="description"
     content="Sindy Downloader es una herramienta fácil de usar para descargar contenido multimedia de redes sociales como Instagram, YouTube, TikTok y más. Descarga reels, estados, videos y shorts de manera rápida y gratuita.">
   <title>MediaDownloader</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffd700">
+  <link rel="apple-touch-icon" href="icon.svg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -219,6 +222,19 @@
     });
   </script>
 
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('Service Worker registrado con éxito:', registration.scope);
+          })
+          .catch(error => {
+            console.log('Error al registrar el Service Worker:', error);
+          });
+      });
+    }
+  </script>
 </body>
 
 </html>

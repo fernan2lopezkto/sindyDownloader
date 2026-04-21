@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo oscuro -->
+  <rect width="512" height="512" rx="112" fill="#000000"/>
+  <!-- Flecha de descarga amarilla -->
+  <path d="M256 368 L144 224 L208 224 L208 96 L304 96 L304 224 L368 224 Z" fill="#ffd700"/>
+  <!-- Base de la descarga -->
+  <rect x="144" y="400" width="224" height="32" rx="16" fill="#ffd700"/>
+</svg>
